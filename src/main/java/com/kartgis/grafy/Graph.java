@@ -3,7 +3,6 @@ package com.kartgis.grafy;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
-
 import java.util.Set;
 
 @AllArgsConstructor

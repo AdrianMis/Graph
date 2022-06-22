@@ -5,8 +5,6 @@ import java.util.stream.Collectors;
 
 public class GraphService {
 
-    // Przeszukiwanie wszerz
-    // BFS
     public void breadthFirstSearch(Graph graph) {
 
         while (true){
@@ -29,7 +27,7 @@ public class GraphService {
                     if (graph.getVisitedPoints().contains(nextPoint)) {
                         return false;
                     }
-                    visitPoint(graph, currentPoint);
+                    visitPoint(graph, nextPoint);
                     return true;
                 })
                 .collect(Collectors.toList());
@@ -46,13 +44,7 @@ public class GraphService {
 
     private void visitPoint(Graph graph, Point currentPoint) {
         graph.getVisitedPoints().add(currentPoint);
+        System.out.println("Point with id:"+currentPoint.getId()+" is visited");
         graph.getUnvisitedPoints().remove(currentPoint);
     }
-
-
-    // Przeszukiwanie wgłąb
-    // DFS
-//    public void depthFirstSearch(Graph graph) {
-//
-//    }
 }

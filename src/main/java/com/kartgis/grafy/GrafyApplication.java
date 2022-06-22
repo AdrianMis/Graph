@@ -4,17 +4,19 @@ import com.google.common.collect.ImmutableSet;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
+import java.util.Arrays;
 import java.util.Collections;
+import java.util.HashSet;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-@SpringBootApplication
+//@SpringBootApplication
 public class GrafyApplication {
 
     public static void main(String[] args) {
-        SpringApplication.run(GrafyApplication.class, args);
+        //SpringApplication.run(GrafyApplication.class, args);
 
-
+        //DATA
         GraphService graphService = new GraphService();
 
         Point point1 = new Point(1L);
@@ -65,15 +67,24 @@ public class GrafyApplication {
         point13.setPaths(ImmutableSet.of(path8,path9));
         point14.setPaths(ImmutableSet.of());
 
+        //WHEN
+        Set<Point> points = new HashSet<>(Arrays.asList(point1,point2,point3,point4,point5,point6,point7,point8,point9,point10,point11,point12,point13,point14));
+        Graph graph = new Graph(1L, points,new HashSet<>());
 
-        Set<Point> points = ImmutableSet.of(point1,point2,point3,point4,point5,point6,point7,point8,point9,point10,point11,point12,point13,point14);
-        Graph graph = new Graph(1L, points,Collections.emptySet());
 
+        //THEN
+        sout("BEFORE:",graph);
         graphService.breadthFirstSearch(graph);
-        System.out.println("visited");
-        graph.getVisitedPoints().forEach(p -> System.out.println(p));
-        System.out.println("unvisited");
-        graph.getUnvisitedPoints().forEach(p -> System.out.println(p));
+        sout("AFTER:",graph);
 
     }
+
+    private static void sout(String status, Graph graph){
+        System.out.println(status);
+        System.out.println("visited");
+        graph.getVisitedPoints().forEach(p -> System.out.println(p.getId()));
+        System.out.println("unvisited");
+        graph.getUnvisitedPoints().forEach(p -> System.out.println(p.getId()));
+    }
+
 }
