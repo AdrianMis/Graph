@@ -10,6 +10,5 @@ import java.util.Set;
 @Setter
 public class Graph {
     private Long id;
-    private Set<Point> unvisitedPoints;
-    private Set<Point> visitedPoints;
+    private Set<Point> Points;
 }
