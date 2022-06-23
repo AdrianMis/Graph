@@ -1,14 +1,10 @@
 package com.kartgis.grafy;
 
 import com.google.common.collect.ImmutableSet;
-import org.springframework.boot.SpringApplication;
-import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 import java.util.Arrays;
-import java.util.Collections;
 import java.util.HashSet;
 import java.util.Set;
-import java.util.stream.Collectors;
 
 //@SpringBootApplication
 public class GrafyApplication {
@@ -17,7 +13,6 @@ public class GrafyApplication {
         //SpringApplication.run(GrafyApplication.class, args);
 
         //DATA
-        GraphService graphService = new GraphService();
 
         Point point1 = new Point(1L);
         Point point2 = new Point(2L);
@@ -69,22 +64,23 @@ public class GrafyApplication {
 
         //WHEN
         Set<Point> points = new HashSet<>(Arrays.asList(point1,point2,point3,point4,point5,point6,point7,point8,point9,point10,point11,point12,point13,point14));
-        Graph graph = new Graph(1L, points,new HashSet<>());
+        Graph graph = new Graph(1L,points);
+        GraphService graphService = new GraphService();
 
 
         //THEN
-        sout("BEFORE:",graph);
-        graphService.breadthFirstSearch(graph);
-        sout("AFTER:",graph);
+        sout("BEFORE:",graphService);
+        graphService.depthFirstSearch(graph);
+        sout("AFTER:",graphService);
 
     }
 
-    private static void sout(String status, Graph graph){
+    private static void sout(String status, GraphService graphService){
         System.out.println(status);
         System.out.println("visited");
-        graph.getVisitedPoints().forEach(p -> System.out.println(p.getId()));
+        graphService.getVisitedPoints().forEach(p -> System.out.println(p.getId()));
         System.out.println("unvisited");
-        graph.getUnvisitedPoints().forEach(p -> System.out.println(p.getId()));
+        graphService.getUnvisitedPoints().forEach(p -> System.out.println(p.getId()));
     }
 
 }
